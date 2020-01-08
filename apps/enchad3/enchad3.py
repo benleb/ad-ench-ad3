@@ -118,25 +118,11 @@ class EnChAD3(hass.Hass):  # type: ignore
         # init adutils
         self.adu = adu(APP_NAME, self.cfg, icon=APP_ICON, ad=self, show_config=True)
 
-        # temp. warning bevore removing "interval"
-        if "interval" in battery_cfg:
-            self.adu.log(f"", icon="🧨")
-            self.adu.log(
-                f" Please convert your {adu.hl('interval')} (in hours)"
-                f" setting to {adu.hl('interval_min')} (in minutes)",
-                icon="🧨",
-            )
-            self.adu.log(
-                f" The {adu.hl('interval')} option will be removed in  future release",
-                icon="🧨",
-            )
-            self.adu.log(f"", icon="🧨")
-
     def check_battery(self, _: Any) -> None:
         """Handle scheduled checks."""
         results: List[str] = []
 
-        self.adu.log(f"Checking entities for low battery levels...", APP_ICON)
+        self.adu.log(f"Checking entities for low battery levels...", icon=APP_ICON)
 
         entities = filter(
             lambda x: x.lower() not in self.cfg["exclude"], self.get_state()
@@ -181,7 +167,7 @@ class EnChAD3(hass.Hass):  # type: ignore
         """Handle scheduled checks."""
         results: List[str] = []
 
-        self.adu.log(f"Checking entities for unavailable/unknown state...", APP_ICON)
+        self.adu.log(f"Checking entities for unavailable/unknown state...", icon=APP_ICON)
 
         entities = filter(
             lambda x: x.lower() not in self.cfg["exclude"], self.get_state()
@@ -225,10 +211,10 @@ class EnChAD3(hass.Hass):  # type: ignore
         if entites_found > 0:
             self.adu.log(
                 f"{adu.hl(f'{entites_found} entities')} with {adu.hl(reason)}!",
-                APP_ICON,
+                icon=APP_ICON,
             )
         else:
-            self.adu.log(f"no entities with {reason} found", APP_ICON)
+            self.adu.log(f"no entities with {reason} found", icon=APP_ICON)
 
     def _get_vi_state(self, entity: str, attribute: Optional[str] = None) -> Any:
         # unified wrapper for get_state in AD3 and AD3
