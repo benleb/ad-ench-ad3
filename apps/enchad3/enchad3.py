@@ -29,7 +29,7 @@ except ImportError:
 
 APP_NAME = "EnChAD3"
 APP_ICON = "👩‍⚕️"
-APP_VERSION = "0.4.11"
+APP_VERSION = "0.4.12"
 
 BATTERY_MIN_LEVEL = 20
 INTERVAL_BATTERY_MIN = 180
