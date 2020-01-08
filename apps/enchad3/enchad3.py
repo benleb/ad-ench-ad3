@@ -167,7 +167,9 @@ class EnChAD3(hass.Hass):  # type: ignore
         """Handle scheduled checks."""
         results: List[str] = []
 
-        self.adu.log(f"Checking entities for unavailable/unknown state...", icon=APP_ICON)
+        self.adu.log(
+            f"Checking entities for unavailable/unknown state...", icon=APP_ICON
+        )
 
         entities = filter(
             lambda x: x.lower() not in self.cfg["exclude"], self.get_state()
