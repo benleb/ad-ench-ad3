@@ -20,6 +20,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
 
 from adutils import ADutils as adu
+from fnmatch import fnmatch
 
 try:
     import hassapi as hass  # newer variant
