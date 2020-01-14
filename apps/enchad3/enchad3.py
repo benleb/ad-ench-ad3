@@ -20,6 +20,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
 
 from adutils import ADutils as adu
+from fnmatch import fnmatch
 
 try:
     import hassapi as hass  # newer variant
@@ -125,7 +126,7 @@ class EnChAD3(hass.Hass):  # type: ignore
         self.adu.log(f"Checking entities for low battery levels...", icon=APP_ICON)
 
         entities = filter(
-            lambda x: x.lower() not in self.cfg["exclude"], self.get_state()
+            lambda item: not any(fnmatch(item.lower(), pattern) for pattern in self.cfg["exclude"]), self.get_state()
         )
 
         for entity in sorted(entities):
@@ -172,7 +173,7 @@ class EnChAD3(hass.Hass):  # type: ignore
         )
 
         entities = filter(
-            lambda x: x.lower() not in self.cfg["exclude"], self.get_state()
+            lambda item: not any(fnmatch(item.lower(), pattern) for pattern in self.cfg["exclude"]), self.get_state()
         )
 
         for entity in sorted(entities):
